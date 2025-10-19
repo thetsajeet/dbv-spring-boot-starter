@@ -54,7 +54,6 @@ class DatabaseValidationService {
     }
 
     private String getTableNameFromEntity(Class<?> entityClass) {
-
         // Check for @Table annotation
         if (entityClass.isAnnotationPresent(Table.class)) {
             Table tableAnnotation = entityClass.getAnnotation(Table.class);
