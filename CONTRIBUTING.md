@@ -27,10 +27,10 @@ If you find a bug or have a feature request:
 2. **Clone** your fork locally
 3. **Create** a new branch for your feature or fix:
 4. Make your changes following the project’s code style.
-5. Test your changes to make sure nothing breaks. 
-6. Push your branch to your fork 
-7. Submit a Pull Request (PR) against the main repository.
-8. PRs should be clear and focused. Reference the related issue in your PR description
+5. Test your changes to make sure nothing breaks.
+6. Push your branch to your fork
+7. Submit a Pull Request (PR) against `feature/develop`.
+8. PRs should be clear and focused. Reference the related issue in your PR description. (By adding the issue number eg: `#12`)
 
 ```bash
 git clone https://github.com/your-username/database-validator.git
@@ -40,9 +40,9 @@ git push origin feature/my-new-feature
 
 ## Guidelines
 
-- Follow Java and Spring Boot coding conventions. 
-- Write meaningful commit messages. 
-- Keep changes atomic (one feature/fix per PR). 
+- Follow Java and Spring Boot coding conventions.
+- Write meaningful commit messages.
+- Keep changes atomic (one feature/fix per PR).
 - Add unit tests for new functionality wherever possible.
 
 ## Thank you
