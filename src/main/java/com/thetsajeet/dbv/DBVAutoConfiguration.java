@@ -17,8 +17,9 @@ class DBVAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public DatabaseValidationService databaseValidationService(DataSource dataSource,
-                                                               EntityManagerFactory entityManagerFactory) {
-        return new DatabaseValidationService(dataSource, entityManagerFactory);
+                                                               EntityManagerFactory entityManagerFactory,
+                                                               DbvStarterProperties properties) {
+        return new DatabaseValidationService(dataSource, entityManagerFactory, properties);
     }
 
     @Bean
