@@ -84,12 +84,10 @@ class DatabaseValidationServiceTest {
         when(metamodel.getEntities()).thenReturn(Set.of(entityType));
 
         ResultSet tableResultSet = mock(ResultSet.class);
-//        when(metaData.getTables(null, "public", "test_entity", new String[]{"TABLE", "VIEW"})).thenReturn(tableResultSet);
         when(metaData.getTables(isNull(), anyString(), anyString(), any(String[].class))).thenReturn(tableResultSet);
         when(tableResultSet.next()).thenReturn(true);
 
         ResultSet columnResultSet = mock(ResultSet.class);
-//        when(metaData.getColumns(null, "public", "test_entity", "name")).thenReturn(columnResultSet);
         when(metaData.getColumns(isNull(), anyString(), anyString(), anyString())).thenReturn(columnResultSet);
         when(columnResultSet.next()).thenReturn(true);
 
@@ -153,76 +151,5 @@ class DatabaseValidationServiceTest {
             return events;
         }
     }
-/*
-    @Mock
-    private DataSource dataSource;
-    @Mock
-    private Connection connection;
-    @Mock
-    private EntityManagerFactory entityManagerFactory;
-    @Mock
-    private Metamodel metamodel;
-    @Mock
-    private EntityType<?> entityType;
-    @Mock
-    private DatabaseMetaData metaData;
-    @Mock
-    private ResultSet tablesResultSet;
-    @Mock
-    private ResultSet columnsResultSet;
-
-    @InjectMocks
-    private DatabaseValidationService databaseValidationService;
-
-
-
-    @BeforeEach
-    void setUp() throws Exception {
-        MockitoAnnotations.openMocks(this);
-
-        when(dataSource.getConnection()).thenReturn(connection);
-        when(connection.getMetaData()).thenReturn(metaData);
-        when(connection.getSchema()).thenReturn("public");
-
-        // Mock entity metadata
-        when(entityManagerFactory.getMetamodel()).thenReturn(metamodel);
-        Set<EntityType<?>> entities = new HashSet<>();
-        entities.add(entityType);
-        when(metamodel.getEntities()).thenReturn(entities);
-
-        // Mock entity type
-//        when(entityType.getJavaType()).thenReturn(DummyEntity.class);
-        when(entityType.getName()).thenReturn("DummyEntity");
-
-        // Mock getTables result
-        when(metaData.getTables(any(), any(), eq("dummy_table"), any()))
-                .thenReturn(tablesResultSet);
-        when(tablesResultSet.next()).thenReturn(true);
-
-        // Mock getColumns result
-        when(metaData.getColumns(any(), any(), eq("dummy_table"), any()))
-                .thenReturn(columnsResultSet);
-        when(columnsResultSet.next()).thenReturn(true);
-    }
-
-    @Test
-    void testExecute_WhenTableAndColumnsExist_ShouldPass() throws Exception {
-        databaseValidationService.execute();
-
-        // Verify database interactions
-        verify(metaData).getTables(null, "public", "dummy_table", new String[]{"TABLE", "VIEW"});
-        verify(metaData, atLeastOnce()).getColumns(null, "public", "dummy_table", "name");
-        verify(metaData, atLeastOnce()).getColumns(null, "public", "dummy_table", "age");
-    }
-
-    // Dummy entity class for testing
-    @Entity
-    @Table(name = "dummy_table")
-    static class DummyEntity {
-        @Column(name = "name")
-        private String name;
-        @Column(name = "age")
-        private int age;
-    }*/
 
 }
