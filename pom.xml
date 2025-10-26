@@ -28,6 +28,10 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<!-- Properties for frontend-maven-plugin configuration -->
+		<frontend-maven-plugin.version>1.15.0</frontend-maven-plugin.version>
+		<node.version>v20.11.0</node.version>
+		<npm.version>10.2.4</npm.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -46,4 +50,70 @@
             <scope>provided</scope>
         </dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- Plugin to manage Node.js and npm for frontend tasks like linting and formatting -->
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>${frontend-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<!-- Install Node.js and npm early in the build lifecycle -->
+						<phase>initialize</phase>
+						<configuration>
+							<nodeVersion>${node.version}</nodeVersion>
+							<npmVersion>${npm.version}</npmVersion>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<!-- Execute npm install to fetch frontend dependencies after node/npm are installed -->
+						<phase>generate-resources</phase>
+						<configuration>
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm run lint:check</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<!-- Run ESLint checks in a later phase to ensure npm install is complete -->
+						<phase>process-resources</phase>
+						<configuration>
+							<arguments>run lint:check</arguments>
+							<failOnError>true</failOnError> <!-- Fail the build if any linting issues are found -->
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm run format:check</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<!-- Run Prettier format checks in a later phase to ensure npm install is complete -->
+						<phase>process-resources</phase>
+						<configuration>
+							<arguments>run format:check</arguments>
+							<failOnError>true</failOnError> <!-- Fail the build if any formatting issues are found -->
+						</configuration>
+					</execution>
+				</executions>
+				<!--
+				Optional: Configure a working directory if your package.json,
+				.eslintrc.js, etc., are not in the project root.
+				Example: <workingDirectory>${project.basedir}/src/main/frontend</workingDirectory>
+				-->
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

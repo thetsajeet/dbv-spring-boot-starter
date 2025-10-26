@@ -48,3 +48,12 @@ git push origin feature/my-new-feature
 ## Thank you
 
 Your contributions make this project better for everyone. Thank you for helping the community!
+
+
+# To check for linting errors and formatting issues (does not fix them)
+npm run lint:check
+npm run format:check
+
+# To automatically fix linting errors and format code
+npm run lint
+npm run format
