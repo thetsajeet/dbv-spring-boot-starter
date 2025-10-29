@@ -23,5 +23,11 @@ jobs:
       - name: Build with Maven
         run: mvn clean install
 
+      - name: Run Spotless (Format Check)
+        run: mvn spotless:check
+
+      - name: Run Checkstyle (Lint)
+        run: mvn checkstyle:check
+
       - name: Run tests
         run: mvn test
