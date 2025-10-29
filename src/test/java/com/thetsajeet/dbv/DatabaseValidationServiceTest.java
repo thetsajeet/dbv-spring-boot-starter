@@ -7,9 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @ExtendWith(MockitoExtension.class)
 class DatabaseValidationServiceTest {
-    @Autowired
-    private DatabaseValidationService databaseValidationService;
+  @Autowired private DatabaseValidationService databaseValidationService;
 
-    @Test
-    void testGetTableNameFromEntity() {}
+  @Test
+  void testGetTableNameFromEntity() {}
 }
